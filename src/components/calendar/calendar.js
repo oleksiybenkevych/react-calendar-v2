@@ -1,12 +1,10 @@
 import React from "react";
 import moment from "moment";
 
-import Input from "./components/input";
-import WeekDays from "./components/week_days";
-import CalendarBody from "./components/calendar_body";
-import ToolBar from "./components/tool_bar";
+import Input from "./components/input/input";
+import CalendarBody from "./components/calendar_body/calendar_body";
 
-import "calendar.scss";
+import "./calendar.scss";
 
 export default class Calendar extends React.Component {
   state = {
@@ -15,15 +13,16 @@ export default class Calendar extends React.Component {
       end: null
     },
     firstClick: true,
-    today: moment()
+    today: moment(),
+    open: false
   };
 
   setRange(date) {
-    if (this.firstClick === true) {
+    if (this.state.firstClick) {
       this.props.onChange({ ...this.state.range, start: date });
       this.setState(prevState => ({
         range: {
-          ...prevState.range,
+          end: null,
           start: date
         },
         firstClick: !prevState.firstClick
@@ -41,21 +40,39 @@ export default class Calendar extends React.Component {
   }
 
   render() {
+    const { range, open } = this.state;
     return (
       <div className="app-container">
-        <div className="input-container">
-          <Input />
-          <Input />
+        <div className="inputs-container">
+          <Input
+            label="START DATE"
+            onClick={() => this.setState({ open: true })}
+            value={range.start ? range.start.format("D MMMM YY") : ""}
+          />
+          <Input
+            label="END DATE"
+            onClick={() => this.setState({ open: true })}
+            value={range.end ? range.end.format("D MMMM YY") : ""}
+          />
         </div>
-        <div className="calendar-container">
-          <thead>
-            <ToolBar />
-          </thead>
-          <tbody>
-            <WeekDays />
-            <CalendarBody />
-          </tbody>
-        </div>
+        <CalendarBody
+          open={open}
+          dayClick={date => {
+            this.setRange(date);
+          }}
+          nextClick={e => {
+            this.setState(prevState => ({
+              today: prevState.today.add(1, "month")
+            }));
+          }}
+          prevClick={e => {
+            this.setState(prevState => ({
+              today: prevState.today.subtract(1, "month")
+            }));
+          }}
+          today={this.state.today}
+          range={this.state.range}
+        />
       </div>
     );
   }

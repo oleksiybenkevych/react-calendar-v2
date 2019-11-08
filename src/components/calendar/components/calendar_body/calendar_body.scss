@@ -1,0 +1,13 @@
+.calendar-body {
+  width: fit-content;
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  box-shadow: 5px 5px 28px -7px #ccc;
+  border: solid 1px rgb(228, 231, 231);
+  display: none;
+  &.visible {
+    display: block;
+  }
+}

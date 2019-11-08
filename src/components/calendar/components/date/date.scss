@@ -1,0 +1,42 @@
+.day {
+  // border-left: solid 1px rgba(179, 179, 179, 0.5);
+  width: 33px;
+  height: 32px;
+  text-align: center;
+  font-size: 12px;
+  box-sizing: border-box !important;
+  &:last-child {
+    // border-right: solid 1px rgba(179, 179, 179, 0.5);
+  }
+  &.start,
+  &.end {
+    background-color: rgb(0, 166, 153) !important;
+    color: rgb(255, 255, 255);
+  }
+  &.range {
+    background-color: rgb(102, 226, 218) !important;
+    color: rgb(255, 255, 255);
+  }
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+  &.today {
+    background-color: rgb(170, 170, 170);
+  }
+}
+tr {
+  border-bottom: solid 1px red;
+  .day {
+    // border-top: solid 1px rgba(179, 179, 179, 0.5);
+  }
+  &:first-child {
+    border: none;
+  }
+  &:last-child {
+    border: none;
+    .day {
+      // border-bottom: solid 1px rgba(179, 179, 179, 0.5);
+    }
+  }
+}
