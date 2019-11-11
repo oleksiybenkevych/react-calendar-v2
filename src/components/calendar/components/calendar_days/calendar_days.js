@@ -7,7 +7,7 @@ import "./calendar_days.scss";
 
 export default class CalendaDays extends React.Component {
   render() {
-    const { today, dateClick, range } = this.props;
+    const { today, dateClick, range, onHoverEnd, hoverEnd } = this.props;
     let blanks = [];
     for (let i = 0; i < today.startOf("month").format("d"); i++) {
       blanks.push("");
@@ -22,7 +22,15 @@ export default class CalendaDays extends React.Component {
     let row = [];
     monthDays.forEach((cell, i) => {
       const day = (
-        <Date date={cell} range={range} onClick={date => dateClick(date)} />
+        <Date
+          hoverEnd={hoverEnd}
+          date={cell}
+          range={range}
+          onClick={date => dateClick(date)}
+          onHoverEnd={date => {
+            onHoverEnd(date);
+          }}
+        />
       );
       if (i === 0 || i % 7 !== 0) {
         row.push(day);
