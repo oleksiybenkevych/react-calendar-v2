@@ -20,7 +20,7 @@ class CalendarBody extends React.Component {
       today,
       nextClick,
       prevClick,
-      hoverEnd,
+      hoverEndDate,
       firstClick
     } = this.props;
 
@@ -40,7 +40,8 @@ class CalendarBody extends React.Component {
           <WeekDays />
         </thead>
         <CalendarDays
-          hoverEnd={hoverEnd}
+          firstClick={firstClick}
+          hoverEndDate={hoverEndDate}
           range={range}
           today={today}
           dateClick={date => this.props.dayClick(date)}

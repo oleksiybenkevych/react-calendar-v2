@@ -15,8 +15,7 @@ export default class Calendar extends React.Component {
     firstClick: true,
     today: moment(),
     open: false,
-
-    hoverEnd: null
+    hoverEndDate: null
   };
 
   setRange(date) {
@@ -34,7 +33,12 @@ export default class Calendar extends React.Component {
       this.setState(prevState => ({
         range: {
           ...prevState.range,
-          end: date
+          end: date.isBefore(this.state.range.start)
+            ? this.state.range.start
+            : date,
+          start: date.isBefore(this.state.range.start)
+            ? date
+            : this.state.range.start
         },
         open: false,
         firstClick: !prevState.firstClick
@@ -43,16 +47,9 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const {
-      open,
-      range,
-      // openLeft,
-      // openRight,
-      hoverEnd,
-      firstClick
-    } = this.state;
+    const { open, range, hoverEndDate, firstClick } = this.state;
     return (
-      <div className="app-container">
+      <div className="calendar">
         <div className="inputs-container">
           <Input
             label="START DATE"
@@ -63,12 +60,12 @@ export default class Calendar extends React.Component {
               })
             }
             value={range.start ? range.start.format("D MMMM YYYY") : ""}
-            clearBtn={() =>
+            onClearBtnClick={() =>
               this.setState(prevState => ({
                 range: { start: null, end: null },
                 firstClick: true,
                 open: false,
-                hoverEnd: null
+                hoverEndDate: null
               }))
             }
           />
@@ -81,18 +78,18 @@ export default class Calendar extends React.Component {
               })
             }
             value={range.end ? range.end.format("D MMMM YYYY") : ""}
-            clearBtn={() =>
+            onClearBtnClick={() =>
               this.setState(prevState => ({
                 range: { end: null, start: prevState.range.start },
                 firstClick: false,
                 open: false,
-                hoverEnd: null
+                hoverEndDate: null
               }))
             }
           />
         </div>
         <CalendarBody
-          hoverEnd={hoverEnd}
+          hoverEndDate={hoverEndDate}
           open={open}
           firstClick={firstClick}
           dayClick={date => {
@@ -100,7 +97,7 @@ export default class Calendar extends React.Component {
           }}
           onHoverEnd={date => {
             this.setState({
-              hoverEnd: date
+              hoverEndDate: date
             });
           }}
           nextClick={e => {

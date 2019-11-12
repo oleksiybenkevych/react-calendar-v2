@@ -6,13 +6,18 @@ import "./date.scss";
 
 export default class Date extends React.Component {
   render() {
-    const { date, range, hoverEnd } = this.props;
+    const { date, range, hoverEndDate, firstClick } = this.props;
     if (!date) return <td className="empty-day"></td>;
     return (
       <td
         className={classnames({
           day: true,
-          hoverend: date.isAfter(range.start) && date.isBefore(hoverEnd),
+          hoverend:
+            !firstClick &&
+            range.start &&
+            !range.end &&
+            date.isAfter(range.start) &&
+            date.isBefore(hoverEndDate),
           start: range.start && date.isSame(range.start),
           end: range.end && date.isSame(range.end),
           today: date.isSame(moment().startOf("day")),

@@ -11,11 +11,11 @@
   }
   &.start,
   &.end {
-    background-color: rgb(0, 166, 153) !important;
+    background-color: #223112e0 !important;
     color: rgb(255, 255, 255);
   }
   &.range {
-    background-color: rgb(102, 226, 218) !important;
+    background-color: #789160 !important;
     color: rgb(255, 255, 255);
   }
   &.disabled {
@@ -26,10 +26,10 @@
     background-color: rgb(170, 170, 170);
   }
   &:hover {
-    background-color: rgba(197, 197, 197, 0.486);
+    background-color: rgba(208, 197, 164, 0.568);
   }
   &.hoverend {
-    background-color: rgb(102, 226, 218) !important;
+    background-color: #789160 !important;
     color: rgb(255, 255, 255);
   }
 }

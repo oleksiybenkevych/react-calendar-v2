@@ -5,12 +5,10 @@ import "./input.scss";
 
 export default class Input extends React.Component {
   render() {
-    const { label, onClick, value, clearBtn } = this.props;
+    const { label, onClick, value, onClearBtnClick } = this.props;
     return (
       <div className="input-elem">
-        <div>
-          <span className="label">{label}</span>
-        </div>
+        <span className="label">{label}</span>
         <input
           readOnly
           value={value}
@@ -23,7 +21,7 @@ export default class Input extends React.Component {
           className={classnames({
             clear: true
           })}
-          onClick={clearBtn}
+          onClick={onClearBtnClick}
         >
           X
         </span>
