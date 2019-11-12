@@ -15,8 +15,7 @@ export default class Calendar extends React.Component {
     firstClick: true,
     today: moment(),
     open: false,
-    openLeft: false,
-    openRight: false,
+
     hoverEnd: null
   };
 
@@ -28,8 +27,7 @@ export default class Calendar extends React.Component {
           end: null,
           start: date
         },
-        firstClick: !prevState.firstClick,
-        openRight: true
+        firstClick: !prevState.firstClick
       }));
     } else {
       this.props.onChange({ ...this.state.range, end: date });
@@ -48,8 +46,8 @@ export default class Calendar extends React.Component {
     const {
       open,
       range,
-      openLeft,
-      openRight,
+      // openLeft,
+      // openRight,
       hoverEnd,
       firstClick
     } = this.state;
@@ -60,8 +58,7 @@ export default class Calendar extends React.Component {
             label="START DATE"
             onClick={() =>
               this.setState({
-                openLeft: true,
-                openRight: false,
+                firstClick: true,
                 open: true
               })
             }
@@ -79,8 +76,7 @@ export default class Calendar extends React.Component {
             label="END DATE"
             onClick={() =>
               this.setState({
-                openRight: true,
-                openLeft: false,
+                firstClick: false,
                 open: true
               })
             }
@@ -98,17 +94,14 @@ export default class Calendar extends React.Component {
         <CalendarBody
           hoverEnd={hoverEnd}
           open={open}
-          openLeft={openLeft}
-          openRight={openRight}
+          firstClick={firstClick}
           dayClick={date => {
             this.setRange(date);
           }}
           onHoverEnd={date => {
-            if (!firstClick) {
-              this.setState({
-                hoverEnd: date
-              });
-            }
+            this.setState({
+              hoverEnd: date
+            });
           }}
           nextClick={e => {
             this.setState(prevState => ({

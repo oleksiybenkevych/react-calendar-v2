@@ -16,22 +16,21 @@ class CalendarBody extends React.Component {
   render() {
     const {
       open,
-      openLeft,
-      openRight,
       range,
       today,
       nextClick,
       prevClick,
-      hoverEnd
+      hoverEnd,
+      firstClick
     } = this.props;
 
     return (
       <div
         className={classnames({
           "calendar-body": true,
-          left: openLeft,
+          left: firstClick,
           visible: open,
-          right: openRight
+          right: !firstClick
         })}
       >
         <div className="tool-bar">
