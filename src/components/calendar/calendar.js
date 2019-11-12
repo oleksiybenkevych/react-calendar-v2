@@ -23,7 +23,9 @@ export default class Calendar extends React.Component {
       this.props.onChange({ ...this.state.range, start: date });
       this.setState(prevState => ({
         range: {
-          end: null,
+          end: date.isBefore(this.state.range.end)
+            ? this.state.range.end
+            : null,
           start: date
         },
         firstClick: !prevState.firstClick
@@ -33,15 +35,15 @@ export default class Calendar extends React.Component {
       this.setState(prevState => ({
         range: {
           ...prevState.range,
-          end: date.isBefore(this.state.range.start)
-            ? this.state.range.start
-            : date,
+          end: date.isBefore(this.state.range.start) ? null : date,
           start: date.isBefore(this.state.range.start)
             ? date
             : this.state.range.start
         },
-        open: false,
-        firstClick: !prevState.firstClick
+        open: date.isBefore(this.state.range.start) ? true : false,
+        firstClick: date.isBefore(this.state.range.start)
+          ? this.state.firstClick
+          : !prevState.firstClick
       }));
     }
   }

@@ -14,8 +14,6 @@ export default class Date extends React.Component {
           day: true,
           hoverend:
             !firstClick &&
-            range.start &&
-            !range.end &&
             date.isAfter(range.start) &&
             date.isBefore(hoverEndDate),
           start: range.start && date.isSame(range.start),
