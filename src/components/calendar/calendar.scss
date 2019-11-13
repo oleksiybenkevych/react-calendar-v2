@@ -1,4 +1,10 @@
-.inputs-container {
-  display: flex;
-  margin-bottom: 5px;
+.calendar {
+  position: relative;
+  width: 500px;
+
+  .inputs-container {
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-between;
+  }
 }

@@ -1,4 +1,5 @@
 .calendar-body {
+  position: absolute;
   width: fit-content;
   border-radius: 5px;
   padding-right: 10px;
@@ -10,4 +11,13 @@
   &.visible {
     display: block;
   }
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: unset;
+  right: 0;
 }

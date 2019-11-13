@@ -2,13 +2,15 @@
   border: 1px solid #ebebeb !important;
   border-radius: 3px;
   margin-top: 5px;
-  width: 220px;
+  margin-right: 5px;
+  width: 100%;
   height: 30px;
   padding: 10px;
   font-size: 16px;
-}
-input:focus {
-  outline: 0;
+
+  &:focus {
+    outline: outset thin rgb(0, 166, 153);
+  }
 }
 
 .label {
@@ -17,7 +19,26 @@ input:focus {
   line-height: 1.3333333333333333em !important;
   letter-spacing: 0.08333333333333333em !important;
   color: #484848 !important;
-}
-.input-elem {
   width: fit-content;
+}
+
+.input-elem {
+  width: 210px;
+  position: relative;
+}
+
+.clear {
+  padding: 3px;
+  position: absolute;
+  right: 5px;
+  bottom: 3px;
+  cursor: pointer;
+  color: gray;
+
+  &:hover {
+    background-color: rgba(139, 0, 0, 0.082);
+    border-radius: 4px;
+    transition: 0.3s;
+    color: darkred;
+  }
 }
