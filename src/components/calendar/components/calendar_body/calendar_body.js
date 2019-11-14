@@ -2,27 +2,21 @@ import React from "react";
 import classnames from "classnames";
 import onClickOutside from "react-onclickoutside";
 
+import { setOpen } from "../../../../actions/actions";
 import WeekDays from "../week_days/week_days";
 import CalendarDays from "../calendar_days/calendar_days";
 import ToolBar from "../tool_bar/tool_bar";
 
 import "./calendar_body.scss";
+import { connect } from "react-redux";
 // import moment from "moment";
 
 class CalendarBody extends React.Component {
   handleClickOutside(evt) {
-    this.props.onClose();
+    this.props.dispatch(setOpen(false));
   }
   render() {
-    const {
-      open,
-      range,
-      today,
-      nextClick,
-      prevClick,
-      hoverEndDate,
-      firstClick
-    } = this.props;
+    const { open, firstClick } = this.props;
 
     return (
       <div
@@ -34,22 +28,22 @@ class CalendarBody extends React.Component {
         })}
       >
         <div className="tool-bar">
-          <ToolBar today={today} nextClick={nextClick} prevClick={prevClick} />
+          <ToolBar />
         </div>
-        <thead>
-          <WeekDays />
-        </thead>
-        <CalendarDays
-          firstClick={firstClick}
-          hoverEndDate={hoverEndDate}
-          range={range}
-          today={today}
-          dateClick={date => this.props.dayClick(date)}
-          onHoverEnd={date => this.props.onHoverEnd(date)}
-        />
+        <table>
+          <thead>
+            <WeekDays />
+          </thead>
+          <CalendarDays />
+        </table>
       </div>
     );
   }
 }
 
-export default onClickOutside(CalendarBody);
+const mapStateToProps = state => ({
+  open: state.open,
+  firstClick: state.firstClick
+});
+
+export default connect(mapStateToProps)(onClickOutside(CalendarBody));

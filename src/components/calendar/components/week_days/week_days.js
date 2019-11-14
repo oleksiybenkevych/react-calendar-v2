@@ -14,6 +14,6 @@ export default class WeekDays extends React.Component {
         </td>
       );
     });
-    return <tr clasName="week-days">{weekdays} </tr>;
+    return <tr className="week-days">{weekdays}</tr>;
   }
 }

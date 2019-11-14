@@ -1,12 +1,28 @@
 import React from "react";
 import classnames from "classnames";
 import moment from "moment";
+import { connect } from "react-redux";
+
+import {
+  setRangeStart,
+  setRangeEnd,
+  setHoverDate
+} from "../../../../actions/actions";
 
 import "./date.scss";
 
-export default class Date extends React.Component {
+class Date extends React.Component {
+  setRange = date => {
+    const { firstClick, dispatch } = this.props;
+    if (firstClick) {
+      dispatch(setRangeStart(date));
+    } else {
+      dispatch(setRangeEnd(date));
+    }
+  };
+
   render() {
-    const { date, range, hoverEndDate, firstClick } = this.props;
+    const { date, range, hoverEndDate, firstClick, dispatch } = this.props;
     if (!date) return <td className="empty-day"></td>;
     return (
       <td
@@ -25,17 +41,17 @@ export default class Date extends React.Component {
             date.isAfter(range.start) &&
             date.isBefore(range.end),
           disabled:
-            (range.start && !range.end && date.isBefore(range.start)) ||
+            (range.start && !firstClick && date.isBefore(range.start)) ||
             date.isBefore(moment().startOf("day"))
         })}
         onClick={e => {
-          this.props.onClick(date);
+          this.setRange(date);
         }}
         onMouseEnter={e => {
-          this.props.onHoverEnd(date);
+          dispatch(setHoverDate(date));
         }}
         onMouseLeave={e => {
-          this.props.onHoverEnd(null);
+          dispatch(setHoverDate(null));
         }}
       >
         {date.format("D")}
@@ -43,3 +59,11 @@ export default class Date extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  range: state.range,
+  hoverEndDate: state.hoverEndDate,
+  firstClick: state.firstClick
+});
+
+export default connect(mapStateToProps)(Date);

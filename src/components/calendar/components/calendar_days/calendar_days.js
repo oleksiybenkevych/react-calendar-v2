@@ -1,20 +1,15 @@
 import React from "react";
 import moment from "moment";
 
+import { connect } from "react-redux";
 import Date from "../date/date";
 
 import "./calendar_days.scss";
 
-export default class CalendaDays extends React.Component {
+class CalendaDays extends React.Component {
   render() {
-    const {
-      today,
-      dateClick,
-      range,
-      onHoverEnd,
-      hoverEndDate,
-      firstClick
-    } = this.props;
+    const { today } = this.props;
+
     let blanks = [];
     for (let i = 0; i < today.startOf("month").format("d"); i++) {
       blanks.push("");
@@ -27,19 +22,9 @@ export default class CalendaDays extends React.Component {
     let monthDays = [...blanks, ...daysInMonth];
     let rows = [];
     let row = [];
+
     monthDays.forEach((cell, i) => {
-      const day = (
-        <Date
-          firstClick={firstClick}
-          hoverEndDate={hoverEndDate}
-          date={cell}
-          range={range}
-          onClick={date => dateClick(date)}
-          onHoverEnd={date => {
-            onHoverEnd(date);
-          }}
-        />
-      );
+      const day = <Date key={i} date={cell} />;
       if (i === 0 || i % 7 !== 0) {
         row.push(day);
       } else {
@@ -54,10 +39,15 @@ export default class CalendaDays extends React.Component {
 
     return (
       <tbody>
-        {rows.map(date => (
-          <tr>{date}</tr>
+        {rows.map((date, index) => (
+          <tr key={index}>{date}</tr>
         ))}
       </tbody>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  today: state.today
+});
+export default connect(mapStateToProps)(CalendaDays);
