@@ -2,7 +2,6 @@ import {
   NEXT_MONTH,
   PREV_MONTH,
   TOGGLE_CALENDAR,
-  SET_OPEN,
   CLEAR_RANGE,
   CLEAR_RANGE_END,
   SET_RANGE_END,
@@ -39,16 +38,11 @@ function calendar(state = initialState, action) {
     case TOGGLE_CALENDAR: {
       return {
         ...state,
-        firstClick: action.payload.firstClick,
+        firstClick: action.payload.firstClick || state.firstClick,
         open: action.payload.open
       };
     }
-    case SET_OPEN: {
-      return {
-        ...state,
-        open: action.payload
-      };
-    }
+
     case CLEAR_RANGE: {
       return {
         ...state,

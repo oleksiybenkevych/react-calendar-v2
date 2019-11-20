@@ -6,7 +6,6 @@ export const CLEAR_RANGE_END = "CLEAR_RANGE_END";
 export const SET_RANGE_START = "SET_RANGE_START";
 export const SET_RANGE_END = "SET_RANGE_END";
 export const SET_HOVER_DATE = "SET_HOVER_DATE";
-export const SET_OPEN = "SET_OPEN";
 
 export function nextMonth() {
   return { type: NEXT_MONTH };
@@ -18,9 +17,6 @@ export function prevMonth() {
 
 export function toggleCalendar(props) {
   return { type: TOGGLE_CALENDAR, payload: props };
-}
-export function setOpen(value) {
-  return { type: SET_OPEN, payload: value };
 }
 
 export function clearRange() {

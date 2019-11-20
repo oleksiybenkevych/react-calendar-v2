@@ -49,9 +49,6 @@ class Input extends React.Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    range: state.range
-  };
-};
+const mapStateToProps = state => ({ range: state.range });
+
 export default connect(mapStateToProps)(Input);
