@@ -1,15 +1,20 @@
 import React from "react";
-import * as Api from "./services/api";
+import { connect } from "react-redux";
 
 import Calendar from "./components/calendar/calendar";
 
 import "./App.scss";
+import { sendRange } from "./actions/actions";
 
-function App() {
-  const saveRange = range => {
-    Api.saveRange(range);
-  };
-  return <Calendar onChange={range => saveRange(range)} />;
+function App(props) {
+  return (
+    <div>
+      <Calendar />
+      <button onClick={e => props.dispatch(sendRange())}>
+        <span>Search</span>
+      </button>
+    </div>
+  );
 }
 
-export default App;
+export default connect()(App);

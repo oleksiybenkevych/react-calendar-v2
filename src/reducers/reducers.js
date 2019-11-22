@@ -6,7 +6,8 @@ import {
   CLEAR_RANGE_END,
   SET_RANGE_END,
   SET_RANGE_START,
-  SET_HOVER_DATE
+  SET_HOVER_DATE,
+  SEND_RANGE
 } from "../actions/actions";
 import moment from "moment";
 
@@ -36,6 +37,7 @@ function calendar(state = initialState, action) {
       };
     }
     case TOGGLE_CALENDAR: {
+      console.log(action.payload);
       return {
         ...state,
         firstClick: action.payload.firstClick || state.firstClick,
@@ -87,6 +89,9 @@ function calendar(state = initialState, action) {
         ...state,
         hoverEndDate: action.payload
       };
+    }
+    case SEND_RANGE: {
+      return { ...state };
     }
     default:
       return state;

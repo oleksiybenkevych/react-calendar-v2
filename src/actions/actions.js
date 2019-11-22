@@ -6,6 +6,7 @@ export const CLEAR_RANGE_END = "CLEAR_RANGE_END";
 export const SET_RANGE_START = "SET_RANGE_START";
 export const SET_RANGE_END = "SET_RANGE_END";
 export const SET_HOVER_DATE = "SET_HOVER_DATE";
+export const SEND_RANGE = "SEND_RANGE";
 
 export function nextMonth() {
   return { type: NEXT_MONTH };
@@ -35,4 +36,8 @@ export function setRangeEnd(date) {
 
 export function setHoverDate(date) {
   return { type: SET_HOVER_DATE, payload: date };
+}
+
+export function sendRange() {
+  return { type: SEND_RANGE };
 }

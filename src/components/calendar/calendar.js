@@ -7,11 +7,6 @@ import CalendarBody from "./components/calendar_body/calendar_body";
 import "./calendar.scss";
 
 class Calendar extends React.Component {
-  componentDidUpdate() {
-    if (this.props.range.start && this.props.range.end) {
-      this.props.onChange(this.props.range);
-    }
-  }
   render() {
     return (
       <div className="calendar">

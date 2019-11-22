@@ -14,6 +14,7 @@ import "./date.scss";
 class Date extends React.Component {
   setRange = date => {
     const { firstClick, dispatch } = this.props;
+    console.log(date);
     if (firstClick) {
       dispatch(setRangeStart(date));
     } else {

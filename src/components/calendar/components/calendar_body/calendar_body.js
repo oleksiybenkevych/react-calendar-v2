@@ -12,12 +12,13 @@ import { connect } from "react-redux";
 // import moment from "moment";
 
 class CalendarBody extends React.Component {
-  handleClickOutside(evt) {
+  handleClickOutside(e) {
+    e.preventDefault();
     this.props.dispatch(toggleCalendar({ open: false }));
   }
   render() {
     const { open, firstClick } = this.props;
-
+    console.log(firstClick);
     return (
       <div
         className={classnames({

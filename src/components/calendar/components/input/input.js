@@ -30,6 +30,7 @@ class Input extends React.Component {
           type="text"
           placeholder="дд.мм.рррр"
           onClick={e => {
+            e.preventDefault();
             dispatch(
               toggleCalendar({ open: true, firstClick: type === "start" })
             );

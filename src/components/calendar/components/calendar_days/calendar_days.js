@@ -17,7 +17,7 @@ class CalendaDays extends React.Component {
 
     let daysInMonth = [];
     for (let i = 1; i <= today.daysInMonth(); i++) {
-      daysInMonth.push(moment(`${today.format("YYYY MM")} ${i}`));
+      daysInMonth.push(moment(today.set("date", i)).startOf("day"));
     }
     let monthDays = [...blanks, ...daysInMonth];
     let rows = [];

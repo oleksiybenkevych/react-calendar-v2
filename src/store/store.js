@@ -1,7 +1,11 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 
 import calendar from "../reducers/reducers";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "../sagas";
 
-const store = createStore(calendar);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(calendar, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
 export default store;
